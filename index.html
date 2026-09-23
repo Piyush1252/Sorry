@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm Sorry ❤️</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    min-height:100vh; overflow:hidden; font-family:Georgia, 'Times New Roman', serif;
+    background:radial-gradient(circle at top,#fff7fb 0,#ffe8f1 45%,#ffd4e4 100%);
+    color:#54263a; display:flex; align-items:center; justify-content:center;
+  }
+  .hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+  .heart{position:absolute;bottom:-40px;font-size:22px;opacity:.7;animation:float linear infinite}
+  @keyframes float{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+  .card{
+    width:min(92%,520px); min-height:600px; padding:38px 30px;
+    border:1px solid rgba(255,255,255,.9); border-radius:30px;
+    background:rgba(255,255,255,.68); backdrop-filter:blur(12px);
+    box-shadow:0 25px 70px rgba(135,48,83,.18); text-align:center;
+    position:relative; z-index:2; display:flex; flex-direction:column; justify-content:center;
+  }
+  .badge{font-size:14px;letter-spacing:3px;text-transform:uppercase;color:#bd557d;margin-bottom:12px}
+  h1{font-size:52px;color:#a93262;margin-bottom:12px}
+  .subtitle{font-size:18px;line-height:1.6;margin:0 auto 25px;max-width:420px}
+  .bear{font-size:115px;line-height:1;margin:5px 0 25px;filter:drop-shadow(0 8px 8px rgba(120,50,80,.12))}
+  .btn{
+    border:0;border-radius:999px;padding:15px 28px;font-size:16px;font-weight:bold;
+    cursor:pointer;color:white;background:linear-gradient(135deg,#d95786,#ad3563);
+    box-shadow:0 10px 22px rgba(173,53,99,.25);transition:.2s;
+  }
+  .btn:hover{transform:translateY(-2px) scale(1.02)}
+  .btn.secondary{background:white;color:#ad3563;border:1px solid #efb5c9;box-shadow:none;margin-top:10px}
+  .page{display:none;animation:fade .6s ease}.page.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .message{text-align:left;background:#fff7fa;border-radius:22px;padding:24px;line-height:1.8;font-size:16px;margin:18px 0 24px;border:1px solid #f8d8e3}
+  .tiny{font-size:13px;color:#986177;margin-top:18px}
+  .modal{
+    position:fixed;inset:0;background:rgba(63,23,42,.38);display:flex;align-items:center;justify-content:center;
+    z-index:10;padding:20px
+  }
+  .modal-box{background:#fff8fb;border-radius:28px;padding:35px 28px;text-align:center;width:min(90%,400px);box-shadow:0 25px 80px rgba(0,0,0,.2);animation:pop .45s ease}
+  @keyframes pop{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+  .modal-box .emoji{font-size:60px}.modal-box h2{font-size:34px;color:#a93262;margin:10px 0}.modal-box p{line-height:1.6;margin-bottom:22px}
+  .hidden{display:none}
+  .final{font-size:38px;color:#a93262;margin:20px 0 10px}
+  .signature{margin-top:25px;font-size:19px;color:#a93262;font-style:italic}
+  @media(max-width:480px){.card{min-height:570px;padding:30px 20px}h1{font-size:43px}.bear{font-size:95px}.message{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="hearts" id="hearts"></div>
+
+<div class="modal" id="sorryModal">
+  <div class="modal-box">
+    <div class="emoji">🥺💗</div>
+    <h2>I'm Sorry</h2>
+    <p>I made this little corner of the internet just to tell you something I really mean.</p>
+    <button class="btn" onclick="closeModal()">Open my heart 💌</button>
+  </div>
+</div>
+
+<main class="card">
+  <section class="page active" id="page1">
+    <div class="badge">A little message for you</div>
+    <div class="bear">🧸</div>
+    <h1>I'm really sorry.</h1>
+    <p class="subtitle">I know a simple “sorry” can't magically fix everything… but I still want you to hear it from my heart.</p>
+    <button class="btn" onclick="nextPage(2)">I want to hear you out 💗</button>
+  </section>
+
+  <section class="page" id="page2">
+    <div class="badge">From my heart</div>
+    <div class="bear">🥺</div>
+    <div class="message">
+      <p>I’m genuinely sorry for what I did. It was never my intention to hurt you, upset you, or make you feel anything less than loved.</p>
+      <br>
+      <p>I know that saying “I didn’t mean to” doesn’t erase how you felt. I’m not making excuses. I just want you to know that I regret it, and I wish I could go back and handle things differently.</p>
+      <br>
+      <p>You are important to me — more than my ego, more than being right, and definitely more than one stupid moment.</p>
+    </div>
+    <button class="btn" onclick="nextPage(3)">One more thing… 🥹</button>
+  </section>
+
+  <section class="page" id="page3">
+    <div class="badge">One last little thing</div>
+    <div class="bear">🧸❤️</div>
+    <h2 class="final">Can you forgive me?</h2>
+    <p class="subtitle">I promise I’ll try to be more thoughtful, listen better, and remember how much my actions can affect the person I love.</p>
+    <button class="btn" onclick="forgive()">Okay… I forgive you ❤️</button>
+    <button class="btn secondary" onclick="hug()">I need a little time 🥺</button>
+    <p class="tiny" id="reply"></p>
+  </section>
+
+  <section class="page" id="page4">
+    <div class="badge">Thank you</div>
+    <div class="bear">🥰</div>
+    <h1>Come here. ❤️</h1>
+    <p class="subtitle">Consider this website a tiny virtual hug until I can give you a real one.</p>
+    <div class="message" style="text-align:center">
+      <p>Whatever happens, I want us to talk, understand each other, and keep choosing each other.</p>
+      <p class="signature">With all my heart,<br>your idiot who is very, very sorry ❤️</p>
+    </div>
+  </section>
+</main>
+
+<script>
+function nextPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page'+n).classList.add('active');
+}
+function closeModal(){
+  document.getElementById('sorryModal').classList.add('hidden');
+}
+function forgive(){
+  nextPage(4);
+  burst();
+}
+function hug(){
+  document.getElementById('reply').textContent="Take all the time you need. I'll be here. ❤️";
+}
+function burst(){
+  for(let i=0;i<28;i++){
+    const e=document.createElement('div'); e.textContent=['❤️','💗','💕','✨'][Math.floor(Math.random()*4)];
+    e.style.position='fixed'; e.style.left=(45+Math.random()*10)+'vw'; e.style.top='55vh';
+    e.style.fontSize=(18+Math.random()*18)+'px'; e.style.zIndex=20;
+    e.style.transition='transform 1.5s ease, opacity 1.5s ease';
+    document.body.appendChild(e);
+    requestAnimationFrame(()=>{e.style.transform=`translate(${(Math.random()-.5)*500}px,${-Math.random()*500-100}px) rotate(${Math.random()*360}deg)`;e.style.opacity=0});
+    setTimeout(()=>e.remove(),1600);
+  }
+}
+for(let i=0;i<18;i++){
+  const h=document.createElement('span'); h.className='heart'; h.textContent=['♡','♥','💗'][i%3];
+  h.style.left=Math.random()*100+'%'; h.style.animationDuration=(7+Math.random()*8)+'s'; h.style.animationDelay=(-Math.random()*12)+'s';
+  h.style.fontSize=(14+Math.random()*18)+'px'; document.getElementById('hearts').appendChild(h);
+}
+</script>
+</body>
+</html>
